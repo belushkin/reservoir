@@ -10,7 +10,7 @@ echo "\033[32m\n";
 echo "\033[32m 2) php sampler.php flow=1 k=5\n";
 echo "\033[32m This command will run second flow and will try to fetch random string from the random.org and then select k symbols from the generated string\n";
 echo "\033[32m\n";
-echo "\033[32m 3) echo 'Hello, World!' | php sampler.php flow=2 k=5\n";
+echo "\033[32m 3) cat LICENSE.txt | php sampler.php flow=2 k=20\n";
 echo "\033[32m This command will run first flow with STDIN, big amount of data can be fetched with this flow and then select k symbols from the stream\n";
 echo "\033[32m ======================================================================";
 echo "\033[0m\n\n";
@@ -54,7 +54,8 @@ $characters = trim($characters);
 if (strlen($characters) < DEFAULT_STREAM_LENGTH) {
     echo "Please generate at least ".DEFAULT_STREAM_LENGTH." symbols\n";
 } else {
-    echo "First $k symbols of the stream: ", substr($characters, 0, DEFAULT_STREAM_LENGTH), "\n";
+    $line = substr($characters, 0, DEFAULT_STREAM_LENGTH);
+    echo "First ".strlen($line)." symbols of the stream: ", $line, "\n";
     //
     //  FUNCTION IS HERE
     //
