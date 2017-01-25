@@ -1,24 +1,30 @@
 <?php
 
-//======================================================================
-// PHP CLI SCRIPT FOR RESERVOIR SAMPLING ALGORITHM
-// USAGE
-//
-// 1) php sampler.php
-// This command will run default flow with random generating of 20 alphanum symbols and then select k of
-//======================================================================
-
-// php sampler.php -flow=3 -k=5
-// echo 'Hello, World!' | php sampler.php 1
+echo "\033[32m ======================================================================\n";
+echo "\033[32m PHP CLI SCRIPT FOR RESERVOIR SAMPLING ALGORITHM\n";
+echo "\033[32m USAGE:\n";
+echo "\033[32m\n";
+echo "\033[32m 1) php sampler.php flow=0 k=5\n";
+echo "\033[32m This command will run default flow with random generating of 20 alphanum symbols and then select k symbols from the generated string\n";
+echo "\033[32m\n";
+echo "\033[32m 2) php sampler.php flow=1 k=5\n";
+echo "\033[32m This command will run second flow and will try to fetch random string from the random.org and then select k symbols from the generated string\n";
+echo "\033[32m\n";
+echo "\033[32m 3) echo 'Hello, World!' | php sampler.php flow=2 k=5\n";
+echo "\033[32m This command will run first flow with STDIN, big amount of data can be fetched with this flow and then select k symbols from the stream\n";
+echo "\033[32m ======================================================================";
+echo "\033[0m\n\n";
 
 if (count($argv) < 3) {
     echo "Please specify all needed parameters: [flow,k]\n";
     exit();
 }
-$flow = null;
 
 define('DEFAULT_STREAM_LENGTH', 20);
 define('DEFAULT_SAMPLE_SIZE', 5);
+
+$flow = null;
+$k = DEFAULT_SAMPLE_SIZE;
 
 foreach ($argv as $key => $arg) {
     if ($key == 0) continue;
@@ -27,12 +33,12 @@ foreach ($argv as $key => $arg) {
     if ($argument == 'flow') {
         $flow = $value;
     }
-    if ($argument == 'k') {
-        $k = ($value <= DEFAULT_STREAM_LENGTH) ? $value : DEFAULT_SAMPLE_SIZE;
+    if ($argument == 'k' && $value <= DEFAULT_STREAM_LENGTH) {
+        $k = $value;
     }
 }
 
-if ($flow == 0) {
+if ($flow == 2) {
     $f = fopen('php://stdin', 'r');
     $characters = '';
     while( $line = fgets( $f ) ) {
