@@ -1,4 +1,4 @@
-PHP CLI SCRIPT FOR RESERVOIR SAMPLING ALGORITHM
+PHP CLI SCRIPT FOR RESERVOIR SAMPLING ALGORITHM\n
 USAGE:
 1) php sampler.php flow=0 k=5
 This command will run default flow with random generating of 20 alphanum symbols and then select k symbols from the generated string
