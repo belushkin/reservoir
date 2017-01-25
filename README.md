@@ -8,7 +8,7 @@ This command will run default flow with random generating of 20 alphanum symbols
 ```
 php sampler.php flow=1 k=5
 ```
-This command will run second flow and will try to fetch random string from the random.org and then select k symbols from the generated string
+This command will run second flow and will try to fetch random string from the [random.org](https://www.random.org/clients/http/) and then select k symbols from the generated string
 
 ```
 cat LICENSE.txt | php sampler.php flow=2 k=20
