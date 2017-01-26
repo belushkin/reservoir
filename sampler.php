@@ -4,17 +4,17 @@ echo "\033[32m =================================================================
 echo "\033[32m PHP CLI SCRIPT FOR RESERVOIR SAMPLING ALGORITHM\n";
 echo "\033[32m USAGE:\n";
 echo "\033[32m\n";
-echo "\033[32m 1) php sampler.php flow=0 k=5\n";
-echo "\033[32m This command will run flow with random generating of 20 alphanum symbols and then select k symbols from the generated string\n";
+echo "\033[32m php sampler.php\n";
+echo "\033[32m This command random generate 20 alphanum and then select 5 symbols from the generated string\n";
+echo "\033[32m php sampler.php k=4\n";
+echo "\033[32m This command random generate 20 alphanum and then select k=4 symbols from the generated string\n";
+echo "\033[32m php sampler.php flow=0 k=5\n";
+echo "\033[32m This command random generate 20 alphanum symbols and then select k=5 symbols from the generated string\n";
+echo "\033[32m php sampler.php flow=1 k=5\n";
+echo "\033[32m This command fetch random string from the random.org and then select k=5 symbols from the generated string\n";
 echo "\033[32m\n";
-echo "\033[32m 2) php sampler.php flow=1 k=5\n";
-echo "\033[32m This command will try to fetch random string from the random.org and then select k symbols from the generated string\n";
-echo "\033[32m\n";
-echo "\033[32m 3) cat LICENSE.txt | php sampler.php flow=2 k=20\n";
-echo "\033[32m This command will run flow with STDIN (big amount of data can be fetched with it) and then select k symbols from the stream\n";
-echo "\033[32m\n";
-echo "\033[32m 4) php sampler.php\n";
-echo "\033[32m This command will run flow random generating of 20 alphanum and then select 5 symbols from the generated string\n";
+echo "\033[32m cat LICENSE.txt | php sampler.php flow=2 k=20\n";
+echo "\033[32m This command fetch STDIN (big amount of data can be fetched with it) and then select k=20 symbols from the stream\n";
 echo "\033[32m ======================================================================";
 echo "\033[0m\n\n";
 
