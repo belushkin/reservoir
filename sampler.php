@@ -4,17 +4,14 @@ echo "\033[32m =================================================================
 echo "\033[32m PHP CLI SCRIPT FOR RESERVOIR SAMPLING ALGORITHM\n";
 echo "\033[32m USAGE:\n";
 echo "\033[32m\n";
-echo "\033[32m php sampler.php\n";
+echo "\033[34m php sampler.php\n";
 echo "\033[32m This command random generate 20 alphanum and then select 5 symbols from the generated string\n";
-echo "\033[32m php sampler.php k=4\n";
-echo "\033[32m This command random generate 20 alphanum and then select k=4 symbols from the generated string\n";
-echo "\033[32m php sampler.php flow=0 k=5\n";
-echo "\033[32m This command random generate 20 alphanum symbols and then select k=5 symbols from the generated string\n";
-echo "\033[32m php sampler.php flow=1 k=5\n";
-echo "\033[32m This command fetch random string from the random.org and then select k=5 symbols from the generated string\n";
-echo "\033[32m\n";
-echo "\033[32m cat LICENSE.txt | php sampler.php flow=2 k=20\n";
-echo "\033[32m This command fetch STDIN (big amount of data can be fetched with it) and then select k=20 symbols from the stream\n";
+echo "\033[34m php sampler.php 4\n";
+echo "\033[32m This command random generate 20 alphanum and then select 4 symbols from the generated string\n";
+echo "\033[34m php sampler.php random 5\n";
+echo "\033[32m This command fetch random string from the random.org and then select 5 symbols from the generated string\n";
+echo "\033[34m cat LICENSE.txt | php sampler.php 20\n";
+echo "\033[32m This command fetch STDIN (big amount of data can be fetched with it) and then select 20 symbols from the stream\n";
 echo "\033[32m ======================================================================";
 echo "\033[0m\n\n";
 
@@ -24,25 +21,40 @@ define('DEFAULT_SAMPLE_SIZE', 5);
 $flow = null;
 $k = DEFAULT_SAMPLE_SIZE;
 
+//////////////////////////////////////////////////////////////
+// WORKING WITH ARGUMENTS
+//////////////////////////////////////////////////////////////
 foreach ($argv as $key => $arg) {
     if ($key == 0) continue;
-
-    list($argument, $value) = explode('=', $arg);
-    if ($argument == 'flow') {
-        $flow = $value;
+    if (intval($arg) > 0 && $arg <= DEFAULT_STREAM_LENGTH) {
+        $k = $arg;
     }
-    if ($argument == 'k' && $value <= DEFAULT_STREAM_LENGTH) {
-        $k = $value;
+    if ($arg == 'random' ) {
+        $flow = $arg;
     }
 }
 
-if ($flow == 2) {
-    $f = fopen('php://stdin', 'r');
-    $characters = '';
-    while( $line = fgets( $f ) ) {
+//////////////////////////////////////////////////////////////
+// CHECK IF STDIN EXISTS
+//////////////////////////////////////////////////////////////
+$characters = '';
+$f = fopen('php://stdin', 'r');
+$read   = array($f);
+$write  = null;
+$except = null;
+if ( stream_select( $read, $write, $except, 0 ) === 1 ) {
+    while ($line = fgets( $f )) {
         $characters .= $line;
     }
-} elseif ($flow == 1) {
+}
+fclose($f);
+
+//////////////////////////////////////////////////////////////
+// CHOOSE FLOW
+//////////////////////////////////////////////////////////////
+if ($characters) {
+
+} elseif ($flow == 'random') {
     $characters = file_get_contents('https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=off&unique=off&format=plain&rnd=new');
 } else {
     $characters = random_str(DEFAULT_STREAM_LENGTH);
