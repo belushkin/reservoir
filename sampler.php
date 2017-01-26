@@ -5,20 +5,18 @@ echo "\033[32m PHP CLI SCRIPT FOR RESERVOIR SAMPLING ALGORITHM\n";
 echo "\033[32m USAGE:\n";
 echo "\033[32m\n";
 echo "\033[32m 1) php sampler.php flow=0 k=5\n";
-echo "\033[32m This command will run default flow with random generating of 20 alphanum symbols and then select k symbols from the generated string\n";
+echo "\033[32m This command will run flow with random generating of 20 alphanum symbols and then select k symbols from the generated string\n";
 echo "\033[32m\n";
 echo "\033[32m 2) php sampler.php flow=1 k=5\n";
-echo "\033[32m This command will run second flow and will try to fetch random string from the random.org and then select k symbols from the generated string\n";
+echo "\033[32m This command will try to fetch random string from the random.org and then select k symbols from the generated string\n";
 echo "\033[32m\n";
 echo "\033[32m 3) cat LICENSE.txt | php sampler.php flow=2 k=20\n";
-echo "\033[32m This command will run first flow with STDIN, big amount of data can be fetched with this flow and then select k symbols from the stream\n";
+echo "\033[32m This command will run flow with STDIN (big amount of data can be fetched with it) and then select k symbols from the stream\n";
+echo "\033[32m\n";
+echo "\033[32m 4) php sampler.php\n";
+echo "\033[32m This command will run flow random generating of 20 alphanum and then select 5 symbols from the generated string\n";
 echo "\033[32m ======================================================================";
 echo "\033[0m\n\n";
-
-if (count($argv) < 3) {
-    echo "Please specify all needed parameters: [flow,k]\n";
-    exit();
-}
 
 define('DEFAULT_STREAM_LENGTH', 20);
 define('DEFAULT_SAMPLE_SIZE', 5);
